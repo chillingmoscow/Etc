@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ева — веб-дизайнер</title>
+  <meta name="description" content="Портфолио Евы — юного веб-дизайнера. Яркие сайты, лендинги и концепты." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">✦</span> eva<span class="dot">.</span>design
+    </a>
+    <nav>
+      <a href="#about">Обо мне</a>
+      <a href="#works">Работы</a>
+      <a href="#skills">Навыки</a>
+      <a href="#contact" class="btn-ghost">Связаться</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="tag">✨ 14 лет · веб-дизайнер</span>
+        <h1>
+          Привет, я <span class="grad">Ева</span> —<br />
+          придумываю сайты,<br />
+          которые <em>цепляют</em>.
+        </h1>
+        <p class="lead">
+          Создаю лендинги, портфолио и концепты для блогеров, школьных проектов и
+          маленьких брендов. Люблю чистый дизайн, мягкие градиенты и внимание к мелочам.
+        </p>
+        <div class="cta">
+          <a href="#works" class="btn-primary">Посмотреть работы</a>
+          <a href="#contact" class="btn-secondary">Написать мне</a>
+        </div>
+        <div class="stats">
+          <div><b>12+</b><span>проектов</span></div>
+          <div><b>3</b><span>года опыта</span></div>
+          <div><b>∞</b><span>идей в голове</span></div>
+        </div>
+      </div>
+      <div class="hero-card" aria-hidden="true">
+        <div class="card-dots"><i></i><i></i><i></i></div>
+        <div class="card-body">
+          <div class="card-line line-1"></div>
+          <div class="card-line line-2"></div>
+          <div class="card-line line-3"></div>
+          <div class="card-thumb"></div>
+          <div class="card-btn">Открыть</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head">
+        <span class="eyebrow">обо мне</span>
+        <h2>Короткая история</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="emoji">🎨</div>
+          <h3>Рисую с детства</h3>
+          <p>Начинала со скетчей в блокноте. Сейчас перенесла творчество в Figma и веб.</p>
+        </div>
+        <div class="about-card">
+          <div class="emoji">💻</div>
+          <h3>Учу код</h3>
+          <p>Разбираюсь в HTML и CSS, чтобы понимать, как дизайн работает на реальных сайтах.</p>
+        </div>
+        <div class="about-card">
+          <div class="emoji">🌸</div>
+          <h3>Люблю эстетику</h3>
+          <p>Мягкие цвета, аккуратная типографика и детали, которые хочется разглядывать.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="section">
+      <div class="section-head">
+        <span class="eyebrow">работы</span>
+        <h2>Что я делала</h2>
+      </div>
+      <div class="works">
+        <article class="work" style="--a:#ffd0e0;--b:#c7b8ff">
+          <div class="work-visual">
+            <span class="chip">лендинг</span>
+            <div class="mock">
+              <div class="mock-h"></div>
+              <div class="mock-t"></div>
+              <div class="mock-t short"></div>
+              <div class="mock-b"></div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Cocoa Café</h3>
+            <p>Уютный лендинг для локальной кофейни с меню и бронированием столика.</p>
+          </div>
+        </article>
+
+        <article class="work" style="--a:#c6f0d6;--b:#9be7ff">
+          <div class="work-visual">
+            <span class="chip">портфолио</span>
+            <div class="mock grid">
+              <div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Art by Mia</h3>
+            <p>Портфолио-сайт для подруги-иллюстратора с галереей и контактами.</p>
+          </div>
+        </article>
+
+        <article class="work" style="--a:#ffe3a8;--b:#ffb2c8">
+          <div class="work-visual">
+            <span class="chip">соц-медиа</span>
+            <div class="mock stories">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Bloom Blog</h3>
+            <p>Обложки и шаблоны сторис для блога про растения и уют.</p>
+          </div>
+        </article>
+
+        <article class="work" style="--a:#d7c4ff;--b:#a0f0e4">
+          <div class="work-visual">
+            <span class="chip">школьный</span>
+            <div class="mock">
+              <div class="mock-h"></div>
+              <div class="mock-row"><span></span><span></span></div>
+              <div class="mock-b"></div>
+            </div>
+          </div>
+          <div class="work-meta">
+            <h3>Школьный фестиваль</h3>
+            <p>Сайт-приглашение для школьного фестиваля искусств с расписанием.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-head">
+        <span class="eyebrow">навыки</span>
+        <h2>Чем пользуюсь</h2>
+      </div>
+      <ul class="skills">
+        <li>Figma</li>
+        <li>Photoshop</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Тильда</li>
+        <li>Canva</li>
+        <li>Типографика</li>
+        <li>UI / UX</li>
+        <li>Иллюстрация</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="contact-card">
+        <h2>Есть идея? Давай сделаем!</h2>
+        <p>Напиши мне — расскажу, как мы можем превратить твою идею в красивый сайт.</p>
+        <div class="contact-links">
+          <a href="mailto:eva@example.com" class="btn-primary">eva@example.com</a>
+          <a href="#" class="btn-secondary">Telegram</a>
+          <a href="#" class="btn-secondary">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Ева. Сделано с любовью.</span>
+    <span class="small">✦ eva.design</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
