@@ -12,6 +12,16 @@ const $ = (s) => document.querySelector(s);
 const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; };
 const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2));
 
+// fetch JSON, считая ошибкой не-2xx ИЛИ офлайн-маркер от service worker (503 {offline:true}).
+// Так мы не перетираем валидный кэш «пустым» ответом и не теряем заказы.
+async function fetchJson(url, opts) {
+  const r = await fetch(url, opts);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const data = await r.json();
+  if (data && data.offline) throw new Error('offline');
+  return data;
+}
+
 function setNet() {
   const on = navigator.onLine;
   const b = $('#netStatus');
@@ -22,19 +32,24 @@ window.addEventListener('online', () => { setNet(); flushQueue(); });
 window.addEventListener('offline', setNet);
 
 async function loadRefData() {
+  // Меню и столы грузим независимо и с фолбэком на кэш. При ошибке (в т.ч. офлайн-503
+  // от service worker) НЕ перетираем валидный кэш в IndexedDB.
   try {
-    const [menu, tables, health] = await Promise.all([
-      fetch(API + '/api/menu').then((r) => r.json()),
-      fetch(API + '/api/tables').then((r) => r.json()),
-      fetch(API + '/api/health').then((r) => r.json()),
-    ]);
-    MENU = menu; TABLES = tables;
-    await IDB.kvSet('menu', menu);
-    await IDB.kvSet('tables', tables);
-    $('#modeBadge').textContent = 'режим: ' + (health.mode === 'mock' ? 'MOCK (без кредов)' : 'REAL ' + (health.layer || ''));
+    MENU = await fetchJson(API + '/api/menu');
+    await IDB.kvSet('menu', MENU);
   } catch (e) {
     MENU = (await IDB.kvGet('menu')) || MENU;
+  }
+  try {
+    TABLES = await fetchJson(API + '/api/tables');
+    await IDB.kvSet('tables', TABLES);
+  } catch (e) {
     TABLES = (await IDB.kvGet('tables')) || TABLES;
+  }
+  try {
+    const health = await fetchJson(API + '/api/health');
+    $('#modeBadge').textContent = 'режим: ' + (health.mode === 'mock' ? 'MOCK (без кредов)' : 'REAL ' + (health.layer || ''));
+  } catch (e) {
     $('#modeBadge').textContent = 'режим: офлайн (кэш)';
   }
   renderTables();
@@ -136,14 +151,19 @@ async function flushQueue() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(o),
       });
+      // Не-2xx (502 при ошибке создания в QuickResto или офлайн-503 от service worker)
+      // НЕ считаем успехом — заказ остаётся в очереди и будет повторён. Дубля не будет:
+      // idempotencyKey гарантирует серверную идемпотентность при ретрае.
+      if (!res.ok) continue;
       const data = await res.json();
+      if (!data || !data.id) continue; // нет id (напр. офлайн-маркер) — заказ не теряем
       o.localStatus = 'sent';
       o.remoteId = data.id;
       o.remoteStatus = data.status;
       o.mock = data.mock;
       await IDB.ordPut(o);
     } catch (e) {
-      // оставляем в очереди — повторим позже (по таймеру / при возврате сети)
+      // сеть упала — оставляем в очереди, повторим позже (по таймеру / при возврате сети)
     }
   }
   renderOrders();
