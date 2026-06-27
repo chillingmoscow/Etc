@@ -1,0 +1,14 @@
+{
+  "name": "quickresto-waiter-bff",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PoC BFF для кастомного приложения официанта поверх QuickResto (без внешних зависимостей)",
+  "scripts": {
+    "start": "node server.mjs",
+    "spike": "node ../spike/spike.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

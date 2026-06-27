@@ -1,0 +1,11 @@
+# Секреты — НИКОГДА не коммитить
+.env
+*.env
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
