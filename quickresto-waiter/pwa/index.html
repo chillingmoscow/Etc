@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>Официант · QuickResto PoC</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🍽️ Официант <small>QuickResto PoC</small></div>
+    <div id="netStatus" class="badge">…</div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <label class="lbl" for="tableSelect">Стол</label>
+      <select id="tableSelect" class="select"></select>
+    </section>
+
+    <section class="panel">
+      <div class="lbl">Меню</div>
+      <div id="menu" class="menu-grid">Загрузка…</div>
+    </section>
+
+    <section class="panel cart-panel">
+      <div class="lbl">Заказ <span id="cartCount" class="muted"></span></div>
+      <div id="cart" class="cart">Пусто</div>
+      <div class="cart-foot">
+        <input id="comment" class="input" placeholder="Комментарий к заказу…" />
+        <button id="sendBtn" class="btn primary" disabled>Отправить на кухню</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="lbl">Заказы (очередь и статусы)</div>
+      <div id="orders" class="orders">Пока нет</div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span id="modeBadge" class="muted">режим: …</span>
+    <span class="muted"> · офлайн-первый PoC: заказы ставятся в очередь и синхронизируются</span>
+  </footer>
+
+  <script src="/db.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
